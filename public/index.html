@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Облік приватних СЕС</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>☀️ Реєстр сонячних електростанцій</h1>
+        </header>
+
+        <div class="dashboard">
+            <div class="stat-card">Всього СЕС: <span id="statCount">0</span></div>
+            <div class="stat-card">Загальна потужність: <span id="statPower">0</span> кВт</div>
+            <div class="stat-card">СЕС з акумуляторами: <span id="statBattery">0</span></div>
+        </div>
+
+        <main>
+            <section class="form-section">
+                <h2>Реєстрація нової СЕС</h2>
+                <form id="sesForm">
+                    <div class="form-group">
+                        <label>ПІБ власника *</label>
+                        <input type="text" name="owner" required placeholder="Шевченко Тарас Григорович">
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Тип об'єкта *</label>
+                            <select name="objectType" required>
+                                <option value="house">Приватний будинок</option>
+                                <option value="cottage">Дача</option>
+                                <option value="business">Малий бізнес</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Адреса *</label>
+                            <input type="text" name="address" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Тип панелей *</label>
+                            <input type="text" name="panelType" required placeholder="Напр. Monocrystalline">
+                        </div>
+                        <div class="form-group">
+                            <label>Потужність 1 панелі (Вт) *</label>
+                            <input type="number" id="panelPower" name="panelPower" required min="100" max="1000">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Кількість панелей (шт) *</label>
+                            <input type="number" id="panelCount" name="panelCount" required min="1">
+                        </div>
+                        <div class="form-group">
+                            <label>Загальна потужність (кВт)</label>
+                            <input type="number" id="totalPower" name="totalPower" readonly class="readonly-input">
+                        </div>
+                    </div>
+
+                    <div class="form-group checkbox-group">
+                        <label>
+                            <input type="checkbox" id="hasBattery" name="hasBattery"> 
+                            Наявність акумуляторів
+                        </label>
+                    </div>
+                    
+                    <div class="form-group hidden" id="batteryCapacityGroup">
+                        <label>Ємність акумуляторів (кВт·год) *</label>
+                        <input type="number" id="batteryCapacity" name="batteryCapacity" min="1" step="0.1">
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Зареєструвати</button>
+                    </div>
+                </form>
+                <div id="message" class="message"></div>
+            </section>
+
+            <section class="data-section">
+                <div class="list-header">
+                    <h2>Зареєстровані об'єкти</h2>
+                    <select id="filterType" class="filter-select">
+                        <option value="all">Всі типи</option>
+                        <option value="house">Приватні будинки</option>
+                        <option value="cottage">Дачі</option>
+                        <option value="business">Малий бізнес</option>
+                    </select>
+                </div>
+                <div id="sesList" class="ses-list"></div>
+            </section>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
